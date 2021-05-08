@@ -47,7 +47,12 @@ public class Topic_02_Xpath_Css_Part_II {
 		driver.findElement(By.xpath("//div[@class='shipping']/h2[starts-with(text(), \"Estimate\")]"));
 		driver.findElement(By.xpath("//div[contains(@class, \"page-title\")]//button[starts-with(@title,\"Proceed\")]"));
 		
-		//technical 5
+		//technical 5 Nested text
+		
+		
+		//technical 6 AND OR
+		
+		//technical 7 last() and position()
 		
 		
 	}
