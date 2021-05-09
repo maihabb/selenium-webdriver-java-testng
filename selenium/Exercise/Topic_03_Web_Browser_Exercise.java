@@ -1,7 +1,7 @@
 package Exercise;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -21,7 +21,7 @@ public class Topic_03_Web_Browser_Exercise {
 		
 	}
 
-	@Test
+	@Test (enabled = false)
 	public void TC_01_ValidateCurrentUrl() {
 		driver.get("http://live.demoguru99.com/");
 		//Click on My Account at footer
@@ -39,7 +39,7 @@ public class Topic_03_Web_Browser_Exercise {
 		
 	}
 
-	@Test
+	@Test  (enabled = false)
 	public void TC_02_ValidatePageTitle() {
 		driver.get("http://live.demoguru99.com/");
 		driver.findElement(By.xpath("//div[@class=\"footer\"]//a[@title=\"My Account\"]")).click();
@@ -51,7 +51,7 @@ public class Topic_03_Web_Browser_Exercise {
 		
 	}
 
-	@Test
+	@Test (enabled = false)
 	public void TC_03_LoginFormDisplayed() {
 		driver.get("http://live.demoguru99.com/");
 		//Click on My Account at footer
@@ -70,7 +70,7 @@ public class Topic_03_Web_Browser_Exercise {
 	
 	}
 	
-	@Test
+	@Test (enabled = false)
 	public void TC_04_Page_Source() {
 		driver.get("http://live.demoguru99.com/");
 		//Click on My Account at footer
@@ -83,9 +83,33 @@ public class Topic_03_Web_Browser_Exercise {
 		Assert.assertTrue(driver.getPageSource().contains("Create an Account"));
 	}
 
+	@Test
+	public void TC_05_Create_Account() {
+		driver.get("http://live.demoguru99.com/");
+		//Click on My Account at footer
+		driver.findElement(By.xpath("//div[@class=\"footer\"]//a[@title=\"My Account\"]")).click();	
+		//Click on Create Account
+		driver.findElement(By.xpath("//a[@class=\"button\"]")).click();
+		//Fill information
+		driver.findElement(By.id("firstname")).sendKeys("Ha");
+		driver.findElement(By.id("lastname")).sendKeys("Mai");
+		driver.findElement(By.id("email_address")).sendKeys("hamai" + getRandomNum() + "@mailinator.com");
+		driver.findElement(By.id("password")).sendKeys("123456");
+		driver.findElement(By.id("confirmation")).sendKeys("123456");
+		driver.findElement(By.xpath("//button[@title=\"Register\"]")).click();
+		Assert.assertTrue(driver.getPageSource().contains("Thank you for registering with Main Website Store."));
+		Assert.assertEquals(driver.findElement(By.xpath("//li[@class=\"success-msg\"]//span")).getText(), "Thank you for registering with Main Website Store.");
+		
+	
+	}
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
+	}
+	
+	public int getRandomNum() {
+		Random Rand = new Random();
+		return Rand.nextInt();
 	}
 
 }
